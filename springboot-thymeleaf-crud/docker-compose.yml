@@ -1,0 +1,47 @@
+version: '3.8'
+
+services:
+  app:
+    build:
+      context: .
+      dockerfile: Dockerfile
+    container_name: springbootapp
+    ports:
+      - "8081:8080"
+    depends_on:
+      mysql:
+        condition: service_healthy  # Ensure MySQL is healthy before starting the app
+    networks:
+      - app-network
+
+  mysql:
+    image: mysql:latest
+    container_name: mysqldb
+    environment:
+      MYSQL_ROOT_PASSWORD: rootpassword
+      MYSQL_DATABASE: mydatabase
+      MYSQL_USER: myuser
+      MYSQL_PASSWORD: mypassword
+    ports:
+      - "3306:3306"
+    healthcheck:
+      test: ["CMD", "mysqladmin", "ping", "-h", "localhost"]
+      interval: 10s
+      retries: 5
+      start_period: 30s
+      timeout: 10s
+    networks:
+      - app-network
+    volumes:
+      - mysql_data:/var/lib/mysql
+volumes:
+  mysql_data:
+
+networks:
+  app-network:
+    driver: bridge
+
+
+
+
+
