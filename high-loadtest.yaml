@@ -1,0 +1,22 @@
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: high-load-test
+spec:
+  replicas: 5 
+  selector:
+    matchLabels:
+      app: high-load
+  template:
+    metadata:
+      labels:
+        app: high-load
+    spec:
+      containers:
+      - name: high-load
+        image: nginx
+        resources:
+          requests:
+            memory: "2Gi"
+            cpu: "2"
+
