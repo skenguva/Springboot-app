@@ -8,6 +8,7 @@ trigger:
      - Docker/*
 
 variables:
+  DOCKER_BUILDKIT: 1
   # Container registry service connection established during pipeline creation
   dockerRegistryServiceConnection: '3f7775df-5cdc-4676-aa95-9baf01b16c85'
   imageRepository: 'springboot'
