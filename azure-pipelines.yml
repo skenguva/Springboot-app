@@ -13,7 +13,7 @@ variables:
   dockerRegistryServiceConnection: '3f7775df-5cdc-4676-aa95-9baf01b16c85'
   imageRepository: 'springboot'
   containerRegistry: 'skenguva.azurecr.io'
-  dockerfilePath: ''
+  dockerfilePath: '/home/skenguva/myagent/_work/1/s/springboot-thymeleaf-crud'
   tag: '$(Build.BuildId)'
 
   # Agent VM image name
