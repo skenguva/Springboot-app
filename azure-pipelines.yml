@@ -3,9 +3,13 @@
 # https://docs.microsoft.com/azure/devops/pipelines/languages/docker
 
 trigger:
- paths:
-   include:
-     - Docker/*
+  branches:
+    include:
+      - Docker  # Trigger only on the Docker branch
+  paths:
+    include:
+      - springboot-thymeleaf-crud/*  # Trigger only when changes are made to this directory
+
 
 variables:
   DOCKER_BUILDKIT: 1
