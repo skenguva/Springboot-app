@@ -8,7 +8,7 @@ trigger:
       - Docker  # Trigger only on the Docker branch
   paths:
     include:
-      - springboot-thymeleaf-crud/*  # Trigger only when changes are made to this directory
+      - springboot-thymeleaf-crud/** # Trigger only when changes are made to this directory
 
 
 variables:
