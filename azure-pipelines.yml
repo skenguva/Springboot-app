@@ -13,15 +13,16 @@ variables:
   dockerRegistryServiceConnection: '3f7775df-5cdc-4676-aa95-9baf01b16c85'
   imageRepository: 'springboot'
   containerRegistry: 'skenguva.azurecr.io'
-  dockerfilePath: '/home/skenguva/myagent/_work/1/s/springboot-thymeleaf-crud'
+  # Correct the path to the actual Dockerfile
+  dockerfilePath: '/home/skenguva/myagent/_work/1/s/springboot-thymeleaf-crud/Dockerfile'
   tag: '$(Build.BuildId)'
 
-  # Agent VM image name
-  
+# Agent VM image name
 pool:
   name: 'Default'  # Specifies the Default agent pool
   demands:
     - agent.name -equals cicd-runner
+
 stages:
 - stage: Build
   displayName: Build and push stage
