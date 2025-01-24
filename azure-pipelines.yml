@@ -3,10 +3,9 @@
 # https://docs.microsoft.com/azure/devops/pipelines/languages/docker
 
 trigger:
-- Docker 
-
-resources:
-- repo: self
+ paths:
+   include:
+     - Docker/*
 
 variables:
   # Container registry service connection established during pipeline creation
