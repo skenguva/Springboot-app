@@ -14,40 +14,9 @@ spec:
       labels:
         app: springboot
     spec:
-      affinity:
-        nodeAffinity:
-          preferredDuringSchedulingIgnoredDuringExecution:
-          - weight: 1
-            preference:
-              matchExpressions:
-              - key: name
-                operator: In
-                values:
-                - sai
-
-        podAffinity:
-          requiredDuringSchedulingIgnoredDuringExecution:
-          - labelSelector:
-              matchExpressions:
-              - key: app
-                operator: In
-                values:
-                - springboot
-            topologyKey: kubernetes.io/hostname
-        podAntiAffinity:
-          preferredDuringSchedulingIgnoredDuringExecution:
-          - weight: 1
-            podAffinityTerm:
-              labelSelector:
-                matchExpressions:
-                - key: app
-                  operator: In
-                  values:
-                  - springboot
-              topologyKey: kubernetes.io/hostname
-      containers:
+     containers:
       - name: springboot
-        image: skenguva1/sample_springboot_app:1.1 
+        image: skenguva.azurecr.io/springboot:28
         env:
         - name: SPRING_DATASOURCE_URL
           valueFrom:
@@ -66,34 +35,6 @@ spec:
               key: SPRING_DATASOURCE_PASSWORD
         ports:
         - containerPort: 8080
-        resources:
-          requests:
-            memory: "300Mi"
-            cpu: "500m"
-          limits:
-            memory: "512Mi"
-            cpu: "1"
-        livenessProbe:
-          httpGet:
-            path: /actuator/health
-            port: 8080
-          initialDelaySeconds: 30
-          periodSeconds: 10
-
-        readinessProbe:
-          httpGet:
-            path: /actuator/health
-            port: 8080
-          initialDelaySeconds: 15
-          periodSeconds: 5
-
-        startupProbe:
-          httpGet:
-            path: /actuator/health
-            port: 8080
-          initialDelaySeconds: 60
-          periodSeconds: 10
-
 ---
 apiVersion: v1
 kind: Service
@@ -103,10 +44,6 @@ spec:
   selector:
     app: springboot
   ports:
-  - port: 80
+  - port: 8080
     targetPort: 8080
-  type: LoadBalancer
-
-
-
-
+  type: NodePort
