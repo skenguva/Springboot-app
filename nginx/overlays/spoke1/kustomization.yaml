@@ -1,5 +1,11 @@
-bases:
+apiVersion: kustomize.config.k8s.io/v1beta1
+kind: Kustomization
+
+# Replacing 'bases' with 'resources'
+resources:
   - ../../base
-patchesStrategicMerge:
+
+# Replacing 'patchesStrategicMerge' with 'patches'
+patches:
   - values.yaml
 
