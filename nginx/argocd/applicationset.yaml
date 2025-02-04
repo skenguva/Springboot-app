@@ -1,0 +1,30 @@
+apiVersion: argoproj.io/v1alpha1
+kind: ApplicationSet
+metadata:
+  name: nginx-multi-cluster
+  namespace: argocd
+spec:
+  generators:
+  - list:
+      elements:
+      - cluster: hub1
+        url: https://hub1-dns-akzrx717.hcp.eastus.azmk8s.io:443
+      - cluster: spoke1
+        url: https://spoke1-dns-tpd1ab77.hcp.eastus.azmk8s.io:443
+  template:
+    metadata:
+      name: nginx-{{cluster}}
+    spec:
+      project: default
+      source:
+        repoURL: 'https://github.com/skenguva/Springboot-app.git'
+        targetRevision: kubernetes
+        path: overlays/{{cluster}}
+      destination:
+        server: "{{url}}"
+        namespace: default
+      syncPolicy:
+        automated:
+          prune: true
+          selfHeal: true
+
