@@ -19,7 +19,7 @@ spec:
       source:
         repoURL: 'https://github.com/skenguva/Springboot-app.git'
         targetRevision: kubernetes
-        path: nginx/overlays/{{cluster}}
+        path: overlays/{{cluster}}
       destination:
         server: "{{url}}"
         namespace: default
