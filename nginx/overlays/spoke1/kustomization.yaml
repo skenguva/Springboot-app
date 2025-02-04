@@ -6,6 +6,6 @@ resources:
   - ../../base
 
 # Replacing 'patchesStrategicMerge' with 'patches'
-patches:
+patchesStrategicMerge:
   - values.yaml
 
