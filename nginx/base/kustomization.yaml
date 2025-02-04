@@ -1,12 +1,14 @@
 apiVersion: kustomize.config.k8s.io/v1beta1
 kind: Kustomization
 
-# Replacing 'patchesStrategicMerge' with 'patches'
 resources:
   - nginx_deploy.yml
   - service.yaml
 
-# Replacing 'patchesStrategicMerge' with 'patches'
-patchesStrategicMerge:
-  - values.yaml
+patches:
+  - path: values.yaml
+    target:
+      kind: Deployment
+      name: nginx
+
 
