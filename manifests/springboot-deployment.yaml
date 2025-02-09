@@ -16,7 +16,7 @@ spec:
     spec:
      containers:
       - name: springboot
-        image: skenguva.azurecr.io/springboot:15
+        image: skenguva.azurecr.io/springboot:38
         env:
         - name: SPRING_DATASOURCE_URL
           valueFrom:
